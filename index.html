@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aditya Mohan Pathak | Cyberpunk Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <style>
+        /* === GLOBAL RESET & CYBERPUNK THEME === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Share Tech Mono', monospace;
+            background: #0a0a0a;
+            color: #00ff41;
+            overflow-x: hidden;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        /* Matrix Rain Background */
+        .matrix-bg {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: -1;
+            opacity: 0.12;
+        }
+
+        /* Neon Glow */
+        .neon {
+            text-shadow: 
+                0 0 5px #00ff41,
+                0 0 10px #00ff41,
+                0 0 20px #00ff41,
+                0 0 40px #00ff41;
+            animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            from { text-shadow: 0 0 5px #00ff41, 0 0 10px #00ff41, 0 0 20px #00ff41; }
+            to { text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 30px #00ff41, 0 0 50px #00ff41; }
+        }
+
+        .glitch {
+            animation: glitch 2.5s infinite;
+        }
+
+        @keyframes glitch {
+            0%, 100% { transform: translate(0); }
+            20% { transform: translate(-2px, 2px); }
+            40% { transform: translate(-2px, -2px); }
+            60% { transform: translate(2px, 2px); }
+            80% { transform: translate(2px, -2px); }
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0; width: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid #00ff41;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: #ff00ff;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #00ff41;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ff00ff;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 2rem;
+        }
+
+        .hero h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            color: #ff00ff;
+        }
+
+        .hero .tagline {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: #00ffff;
+        }
+
+        .hero p {
+            max-width: 700px;
+            margin: 1.5rem auto;
+            font-size: 1.1rem;
+        }
+
+        .btn-neon {
+            background: transparent;
+            border: 2px solid #00ff41;
+            color: #00ff41;
+            padding: 0.8rem 2rem;
+            font-family: inherit;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.4s;
+            margin-top: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-neon:hover {
+            background: #00ff41;
+            color: #000;
+            box-shadow: 0 0 25px #00ff41;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #ff00ff;
+        }
+
+        /* About */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+        }
+
+        .about-img {
+            width: 100%;
+            border: 2px solid #00ff41;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 255, 65, 0.4);
+        }
+
+        /* Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1.5rem;
+            text-align: center;
+        }
+
+        .skill-card {
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid #00ff41;
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: transform 0.3s;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(0, 255, 65, 0.2);
+        }
+
+        .skill-card h3 {
+            color: #ff00ff;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Contact */
+        .contact form {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .contact input,
+        .contact textarea {
+            padding: 1rem;
+            background: rgba(0, 0, 0, 0.7);
+            border: 1px solid #00ff41;
+            color: #00ff41;
+            font-family: inherit;
+            border-radius: 5px;
+        }
+
+        .contact button {
+            background: #ff00ff;
+            color: #000;
+            border: none;
+            padding: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .contact button:hover {
+            background: #00ff41;
+            color: #000;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background: #000;
+            border-top: 1px solid #00ff41;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .nav-links { gap: 1rem; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Matrix Background -->
+    <canvas class="matrix-bg" id="matrix"></canvas>
+
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo neon">ADITYA</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section id="home" class="hero">
+        <h1 class="neon glitch">ADITYA MOHAN PATHAK</h1>
+        <p class="tagline neon">Frontend Developer | Cyber Enthusiast</p>
+        <p>
+            A passionate BCA student crafting digital experiences with code, neon, and futuristic vision.
+        </p>
+        <button class="btn-neon neon" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">
+            Enter the Grid
+        </button>
+    </section>
+
+    <!-- About -->
+    <section id="about">
+        <h2 class="section-title neon">About Me</h2>
+        <div class="about-grid">
+            <div class="about-text">
+                <p>
+                    <strong class="neon">> System Boot:</strong> I am <strong>Aditya Mohan Pathak</strong>, currently 
+                    <strong>pursuing BCA at Amity University, Noida</strong>. Hailing from <strong>Aligarh</strong>, 
+                    I blend academic rigor with a hacker’s curiosity.
+                </p>
+                <p style="margin-top: 1rem;">
+                    Specializing in <strong>HTML</strong> and <strong>CSS</strong>, I build responsive, 
+                    cyberpunk-inspired interfaces that pulse with neon energy. My mission: 
+                    <span class="neon">turn code into digital art</span>.
+                </p>
+            </div>
+            <div>
+                <img src="https://via.placeholder.com/400x500/00ff41/000000?text=ADITYA+M+PATHAK" alt="Aditya Mohan Pathak" class="about-img">
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section id="skills">
+        <h2 class="section-title neon">Core Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>HTML</h3>
+                <p>Semantic Structure</p>
+            </div>
+            <div class="skill-card">
+                <h3>CSS</h3>
+                <p>Neon Animations & Flexbox</p>
+            </div>
+            <div class="skill-card">
+                <h3>JavaScript</h3>
+                <p>Interactive Effects</p>
+            </div>
+            <div class="skill-card">
+                <h3>Cyberpunk UI</h3>
+                <p>Glitch & Matrix Aesthetics</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact">
+        <h2 class="section-title neon">Transmit Message</h2>
+        <form class="contact">
+            <input type="text" placeholder="Your Name" required>
+            <input type="email" placeholder="Your Email" required>
+            <textarea rows="5" placeholder="Your Message to the Grid..." required></textarea>
+            <button type="submit">SEND SIGNAL</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2025 Aditya Mohan Pathak | <span class="neon">All Systems Secured</span></p>
+    </footer>
+
+    <script>
+        // Matrix Rain Effect
+        const canvas = document.getElementById('matrix');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const katakana = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン';
+        const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        const nums = '0123456789';
+        const chars = katakana + latin + nums;
+
+        const fontSize = 16;
+        const columns = canvas.width / fontSize;
+        const drops = Array(Math.floor(columns)).fill(1);
+
+        function draw() {
+            ctx.fillStyle = 'rgba(10, 10, 10, 0.05)';
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = '#00ff41';
+            ctx.font = `${fontSize}px monospace`;
+
+            for (let i = 0; i < drops.length; i++) {
+                const text = chars[Math.floor(Math.random() * chars.length)];
+                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+                    drops[i] = 0;
+                }
+                drops[i]++;
+            }
+        }
+
+        setInterval(draw, 45);
+
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Form Alert
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Signal transmitted! I’ll hack back soon.');
+        });
+
+        // Resize Canvas
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
+</body>
+</html>
